@@ -1,0 +1,25 @@
+.credit-list {
+  height: calc(100vh - 5rem);
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: flex-start;
+  width: 102%;
+  margin-left: -2%;
+  padding: 1.75rem;
+
+  .credit-list-item {
+    width: 31.33%; // imperial
+    margin-left: 2%;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem 0 rgba(24, 60, 122, 0.15);
+    transition: transform 0.3s;
+    background: white;
+
+    &:hover {
+      transform: scale(1.08);
+    }
+  }
+}

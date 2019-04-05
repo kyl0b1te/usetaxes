@@ -1,0 +1,12 @@
+<div class="credit-content">
+  <p class="credit-date">
+    <span class="date">{{ credit.date | date:'d MMMM, y':undefined:'uk' }}</span>
+    <span class="quarter">I кв.</span>
+  </p>
+  <p class="credit-value">
+    <span class="national-value">{{ credit.nationalAmount | amount }}</span>
+    <span class="foreign-value">{{ credit.foreignAmount | amount }}</span>
+  </p>
+  <button class="credit-action delete"></button>
+  <button class="credit-action edit"></button>
+</div>

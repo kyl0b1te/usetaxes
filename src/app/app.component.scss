@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  main {
+    width: 60%;
+    padding-left: 2%;
+    height: 100vh;
+  }
+
+  aside {
+    width: 35%;
+    height: 100vh;
+  }
+}

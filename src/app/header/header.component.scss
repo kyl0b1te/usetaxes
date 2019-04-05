@@ -1,0 +1,18 @@
+header {
+  height: 5rem;
+  padding: 1rem 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  h1 {
+    img {
+      display: block;
+    }
+    span {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: #0f49b1;
+    }
+  }
+}
