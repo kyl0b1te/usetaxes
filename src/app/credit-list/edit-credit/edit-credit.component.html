@@ -1,0 +1,29 @@
+<form [formGroup]="creditForm">
+  <div class="form-control-group">
+    <div class="form-control control-date">
+      <input
+        type="text"
+        name="date"
+        formControlName="date"
+        ngx-mydatepicker
+        [options]="dateOptions"
+        #dp="ngx-mydatepicker"
+        (click)="dp.toggleCalendar()">
+    </div>
+    <div class="form-control">
+      <input
+        type="text"
+        name="national"
+        formControlName="national">
+    </div>
+  </div>
+  <div class="credit-form-action">
+    <button
+      class="cancel"
+      (click)="onCancelClicked()">Скасувати</button>
+    <button
+      class="save"
+      [disabled]="!creditForm.valid"
+      (click)="onSubmitClicked()">Зберегти</button>
+  </div>
+</form>

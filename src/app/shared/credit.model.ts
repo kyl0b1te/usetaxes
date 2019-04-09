@@ -1,9 +1,12 @@
 import { AmountModel } from '../shared/amount.model';
 
 export class CreditModel {
+  public national: AmountModel;
+
   constructor(
     public date: Date,
-    public nationalAmount: AmountModel,
-    public foreignAmount: AmountModel
-  ) { }
+    national: number
+  ) {
+    this.national = new AmountModel(national, 'UAH')
+  }
 }

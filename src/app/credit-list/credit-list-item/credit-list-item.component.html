@@ -1,12 +1,17 @@
-<div class="credit-content">
+<div class="credit-content" *ngIf="!editCreditMode; else editCreditForm">
   <p class="credit-date">
     <span class="date">{{ credit.date | date:'d MMMM, y':undefined:'uk' }}</span>
-    <span class="quarter">I кв.</span>
+    <span class="quarter">{{ credit.date | quarter }}</span>
   </p>
   <p class="credit-value">
-    <span class="national-value">{{ credit.nationalAmount | amount }}</span>
-    <span class="foreign-value">{{ credit.foreignAmount | amount }}</span>
+    <span class="national-value">{{ credit.national | amount }}</span>
   </p>
-  <button class="credit-action delete"></button>
-  <button class="credit-action edit"></button>
+  <button class="credit-action delete" (click)="onDeleteClicked()"></button>
+  <button class="credit-action edit" (click)="onEditCreditModeToggle()"></button>
 </div>
+<ng-template #editCreditForm>
+  <app-edit-credit
+    (onCancel)="onEditCreditModeToggle()"
+    (onSubmit)="onEditClicked($event)"
+    [credit]="credit"></app-edit-credit>
+</ng-template>

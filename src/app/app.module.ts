@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeUk from '@angular/common/locales/uk';
+import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 
-registerLocaleData(localeUk, 'uk')
+registerLocaleData(localeUk, 'uk');
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +14,11 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { CreditListItemComponent } from './credit-list/credit-list-item/credit-list-item.component';
 import { CreditListFilterComponent } from './header/credit-list-filter/credit-list-filter.component';
 import { AmountPipe } from './shared/amount.pipe';
-import { CreditService } from './credit-list/credit.service';
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from './store/app.reducer';
+import { ReactiveFormsModule } from '@angular/forms';
+import { QuarterPipe } from './shared/quarter.pipe';
+import { EditCreditComponent } from './credit-list/edit-credit/edit-credit.component';
 
 @NgModule({
   declarations: [
@@ -23,15 +28,18 @@ import { CreditService } from './credit-list/credit.service';
     CheckoutComponent,
     CreditListItemComponent,
     CreditListFilterComponent,
-    AmountPipe
+    AmountPipe,
+    QuarterPipe,
+    EditCreditComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    NgxMyDatePickerModule.forRoot(),
+    StoreModule.forRoot({ credits: appReducer })
   ],
-  providers: [
-    CreditService,
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

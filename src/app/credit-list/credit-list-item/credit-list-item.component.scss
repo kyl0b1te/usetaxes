@@ -72,3 +72,34 @@
     }
   }
 }
+
+.form-control-group {
+  padding: 1.5rem;
+}
+
+.credit-form-action {
+  button {
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+    height: 3rem;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    width: 50%;
+
+    &.cancel {
+      background-color: gray;
+      border-bottom-left-radius: 1rem;
+    }
+
+    &.save {
+      background-color: green;
+      border-bottom-right-radius: 1rem;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

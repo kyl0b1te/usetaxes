@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CreditModel } from './credit.model';
-import { AmountModel } from '../shared/amount.model';
-import { CreditService } from './credit.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { CreditModel } from '../shared/credit.model';
+import * as fromApp from '../store/app.reducer';
+import * as AppActions from '../store/app.actions';
 
 @Component({
   selector: 'app-credit-list',
@@ -9,12 +12,22 @@ import { CreditService } from './credit.service';
   styleUrls: ['./credit-list.component.scss']
 })
 export class CreditListComponent implements OnInit {
-  credits: CreditModel[];
+  creditsState: Observable<{credits: CreditModel[]}>;
+  addCreditMode = false;
 
-  constructor(private creditService: CreditService) { }
+  constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
-    this.credits = this.creditService.getCredits();
+    this.creditsState = this.store.select('credits');
+  }
+
+  onAddCreditModeToggle() {
+    this.addCreditMode = !this.addCreditMode;
+  }
+
+  onAddCreditSubmit(credit: CreditModel) {
+    this.store.dispatch(new AppActions.AddCredit(credit));
+    this.addCreditMode = false;
   }
 
 }
