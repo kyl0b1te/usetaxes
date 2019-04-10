@@ -6,6 +6,9 @@
   <p class="credit-value">
     <span class="national-value">{{ credit.national | amount }}</span>
   </p>
+  <p class="credit-value">
+    <span class="foreign-value">{{ credit.foreign | amount }}</span>
+  </p>
   <button class="credit-action delete" (click)="onDeleteClicked()"></button>
   <button class="credit-action edit" (click)="onEditCreditModeToggle()"></button>
 </div>

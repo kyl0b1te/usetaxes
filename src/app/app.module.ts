@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { registerLocaleData } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import localeUk from '@angular/common/locales/uk';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 
@@ -21,6 +22,7 @@ import { AmountPipe } from './shared/amount.pipe';
 
 import { appReducer } from './store/app.reducer';
 import { QuarterService } from './shared/quarter.service';
+import { ConversionService } from './credit-list/conversion.service';
 
 @NgModule({
   declarations: [
@@ -37,11 +39,13 @@ import { QuarterService } from './shared/quarter.service';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
     NgxMyDatePickerModule.forRoot(),
     StoreModule.forRoot({ credits: appReducer })
   ],
   providers: [
-    QuarterService
+    QuarterService,
+    ConversionService
   ],
   bootstrap: [AppComponent]
 })

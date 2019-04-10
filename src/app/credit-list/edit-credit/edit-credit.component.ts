@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { INgxMyDpOptions } from 'ngx-mydatepicker';
 
 import { CreditModel } from '../../shared/credit.model';
+import { AmountModel } from 'src/app/shared/amount.model';
+import { ConversionService } from '../conversion.service';
 
 @Component({
   selector: 'app-edit-credit',
@@ -18,7 +20,12 @@ export class EditCreditComponent implements OnInit {
   dateOptions: INgxMyDpOptions = { dateFormat: 'dd.mm.yyyy' };
   creditForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  defaultCurrency = 'UAH';
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private conService: ConversionService
+  ) { }
 
   ngOnInit() {
     this.initCreditForm();
@@ -31,11 +38,23 @@ export class EditCreditComponent implements OnInit {
         this.credit ? { jsdate: this.credit.date } : null,
         Validators.required
       ],
-      national: [
+      amount: [
         this.credit ? this.credit.national.amount : null,
         [Validators.required, amountValidator]
       ],
+      currency: [ this.defaultCurrency ]
     });
+  }
+
+  getSupportedCurrencies() {
+    return ['UAH', 'EUR', 'USD', 'CAD', 'CHF', 'PLN', 'CHF', 'GBP'];
+  }
+
+  getForeignAmount(amount: number, currency: string) {
+    if (currency !== this.defaultCurrency) {
+      return new AmountModel(+amount, currency);
+    }
+    return null;
   }
 
   onCancelClicked() {
@@ -43,12 +62,22 @@ export class EditCreditComponent implements OnInit {
   }
 
   onSubmitClicked() {
-    const values = this.creditForm.value;
-    const credit = new CreditModel(
-      new Date(values.date.jsdate),
-      +values.national
-    );
-    this.onSubmit.emit(credit);
+    const { amount, currency, date } = this.creditForm.value;
+    const foreign = this.getForeignAmount(+amount, currency);
+
+    if (foreign) {
+      this.conService.getConversionRate(date.jsdate, currency).subscribe((rates) => {
+        const converted = Math.round(amount * rates[0].rate * 100) / 100;
+        console.log(converted);
+        this.onSubmit.emit(
+          new CreditModel(date.jsdate, converted, foreign)
+        );
+      });
+    } else {
+      this.onSubmit.emit(
+        new CreditModel(date.jsdate, +amount)
+      );
+    }
     this.creditForm.reset();
   }
 }

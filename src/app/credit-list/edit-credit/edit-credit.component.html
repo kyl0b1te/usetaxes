@@ -13,8 +13,17 @@
     <div class="form-control">
       <input
         type="text"
-        name="national"
-        formControlName="national">
+        name="amount"
+        formControlName="amount">
+    </div>
+    <div class="form-control">
+      <select
+        name="currency"
+        formControlName="currency">
+        <option
+          *ngFor="let currency of getSupportedCurrencies()"
+          [value]="currency">{{ currency }}</option>
+      </select>
     </div>
   </div>
   <div class="credit-form-action">
