@@ -1,3 +1,10 @@
 <div class="checkout">
-
+  <div *ngFor="let quarter of credits | keyvalue">
+    <span>{{ quarter.key }} квартал</span>
+    <ul>
+      <li *ngFor="let credit of quarter.value">
+        {{ credit.national.amount }}
+      </li>
+    </ul>
+  </div>
 </div>

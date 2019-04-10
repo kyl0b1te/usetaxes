@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { CreditModel } from '../shared/credit.model';
 import * as fromApp from '../store/app.reducer';
+import { QuarterService } from '../shared/quarter.service';
 
 @Component({
   selector: 'app-checkout',
@@ -12,15 +13,28 @@ import * as fromApp from '../store/app.reducer';
 })
 export class CheckoutComponent implements OnInit, OnDestroy {
   creditsSubscription: Subscription;
-  credits: CreditModel[];
+  credits = {};
 
-  constructor(private store: Store<fromApp.AppState>) { }
+  constructor(
+    private store: Store<fromApp.AppState>,
+    private quarterService: QuarterService
+  ) { }
 
   ngOnInit() {
-    this.creditsSubscription = this.store.select('credits').subscribe(credits => {
-      // todo :
-      console.log(credits);
+    this.creditsSubscription = this.store.select('credits').subscribe((state: fromApp.State) => {
+      this.credits = {};
+      this.groupByQuarter(state.credits);
     });
+  }
+
+  groupByQuarter(credits: CreditModel[]) {
+    for (const credit of credits) {
+      const quarter = this.quarterService.getQuarter(credit.date);
+      if (!this.credits[quarter]) {
+        this.credits[quarter] = [];
+      }
+      this.credits[quarter].push(credit);
+    }
   }
 
   ngOnDestroy() {
