@@ -1,7 +1,7 @@
 <div class="credit-content" *ngIf="!editCreditMode; else editCreditForm">
   <p class="credit-date">
     <span class="date">{{ credit.date | date:'d MMMM, y':undefined:'uk' }}</span>
-    <span class="quarter">{{ credit.date | quarter }}</span>
+    <span class="quarter">{{ credit.quarter }} кв.</span>
   </p>
   <p class="credit-value">
     <span class="national-value">{{ credit.national | amount }}</span>

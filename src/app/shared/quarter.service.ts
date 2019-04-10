@@ -1,6 +1,6 @@
 
 export class QuarterService {
-  getQuarter(date: Date) {
+  static getQuarter(date: Date) {
     const year = date.getFullYear();
     // Jan-Mar
     if (date >= new Date(year, 0, 1) && date <= new Date(year, 2, 31)) {

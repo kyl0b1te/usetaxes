@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 
 import { CreditModel } from '../shared/credit.model';
 import * as fromApp from '../store/app.reducer';
-import { QuarterService } from '../shared/quarter.service';
 
 @Component({
   selector: 'app-checkout',
@@ -16,8 +15,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   credits = {};
 
   constructor(
-    private store: Store<fromApp.AppState>,
-    private quarterService: QuarterService
+    private store: Store<fromApp.AppState>
   ) { }
 
   ngOnInit() {
@@ -29,7 +27,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   groupByQuarter(credits: CreditModel[]) {
     for (const credit of credits) {
-      const quarter = this.quarterService.getQuarter(credit.date);
+      const quarter = credit.quarter;
       if (!this.credits[quarter]) {
         this.credits[quarter] = [];
       }

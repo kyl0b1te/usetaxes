@@ -17,7 +17,6 @@ import { CreditListItemComponent } from './credit-list/credit-list-item/credit-l
 import { CreditListFilterComponent } from './header/credit-list-filter/credit-list-filter.component';
 import { EditCreditComponent } from './credit-list/edit-credit/edit-credit.component';
 
-import { QuarterPipe } from './shared/quarter.pipe';
 import { AmountPipe } from './shared/amount.pipe';
 
 import { appReducer } from './store/app.reducer';
@@ -32,7 +31,6 @@ import { QuarterService } from './shared/quarter.service';
     CreditListItemComponent,
     CreditListFilterComponent,
     AmountPipe,
-    QuarterPipe,
     EditCreditComponent,
   ],
   imports: [

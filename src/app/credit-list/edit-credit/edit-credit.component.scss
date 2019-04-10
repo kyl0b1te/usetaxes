@@ -1,0 +1,24 @@
+.form-control-group {
+  padding: 1.5rem;
+}
+.credit-form-action {
+  button {
+    width: 50%;
+    height: 3rem;
+    border: none;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+
+    &.cancel {
+      background-color: gray;
+      border-bottom-left-radius: 1rem;
+    }
+
+    &.save {
+      background-color: green;
+      border-bottom-right-radius: 1rem;
+    }
+  }
+}

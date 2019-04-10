@@ -1,6 +1,5 @@
 import { CreditModel } from '../shared/credit.model';
 import * as AppActions from './app.actions';
-import { AmountModel } from '../shared/amount.model';
 
 export interface AppState {
   credits: State;
