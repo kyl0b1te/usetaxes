@@ -1,16 +1,27 @@
 <div class="checkout">
-  <div *ngFor="let quarter of credits | keyvalue">
-    <span>{{ quarter.key }} квартал</span>
-    <ul>
-      <li *ngFor="let credit of quarter.value">
-        {{ credit.national.amount }}
-      </li>
-    </ul>
+  <div class="credits">
+    <p class="title">Надходження</p>
+    <div class="credit-row" *ngFor="let creditDate of credits | keyvalue">
+      <span>{{ creditDate.key }}</span>
+      <div>
+        <p *ngFor="let credit of creditDate.value">
+          {{ credit.national | amount }}
+        </p>
+      </div>
+    </div>
   </div>
-  <p>
-    Загалом: {{ totalCredit | amount }}
-  </p>
-  <p>
-    Податок: {{ totalTax | amount }}
-  </p>
+  <div class="summary">
+    <p>
+      <span>Загальна сумма <br/> надходжень</span>
+      <span class="value">{{ total.credit | amount }}</span>
+    </p>
+    <p>
+      <span>Податок 5%</span>
+      <span class="value">{{ total.tax | amount }}</span>
+    </p>
+    <p class="profit">
+      <span>Прибуток</span>
+      <span class="value">{{ total.profit | amount }}</span>
+    </p>
+  </div>
 </div>

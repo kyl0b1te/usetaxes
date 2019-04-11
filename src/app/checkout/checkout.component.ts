@@ -15,8 +15,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   creditsSubscription: Subscription;
   credits = {};
 
-  totalCredit = new AmountModel(0, 'UAH');
-  totalTax = new AmountModel(0, 'UAH');
+  total: { credit: AmountModel, tax: AmountModel, profit: AmountModel };
 
   constructor(
     private store: Store<fromApp.AppState>
@@ -25,26 +24,26 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.creditsSubscription = this.store.select('credits').subscribe((state: fromApp.State) => {
       this.credits = {};
+      this.total = state.total;
       this.groupByQuarter(state.credits);
     });
   }
 
   groupByQuarter(credits: CreditModel[]) {
-    this.totalCredit.amount = 0;
-    this.totalTax.amount = 0;
     for (const credit of credits) {
-      const quarter = credit.quarter;
-      if (!this.credits[quarter]) {
-        this.credits[quarter] = [];
+      const creditDate = this.getCreditDate(credit.date);
+      if (!this.credits[creditDate]) {
+        this.credits[creditDate] = [];
       }
-      this.credits[quarter].push(credit);
-      this.totalCredit.amount += credit.national.amount;
+      this.credits[creditDate].push(credit);
     }
-    this.totalTax.amount = this.totalCredit.amount * 0.05;
+  }
+
+  private getCreditDate(date: Date): string {
+    return date.toJSON().split('T')[0].split('-').reverse().join('.');
   }
 
   ngOnDestroy() {
     this.creditsSubscription.unsubscribe();
   }
-
 }

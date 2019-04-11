@@ -1,4 +1,57 @@
 .checkout {
   background-image: linear-gradient(to right, #104bb6, #0c43a6);
   height: 100%;
+  color: white;
+
+  .credits {
+    height: calc(100% - 12rem);
+    overflow-y: scroll;
+    padding: 1.5rem 2rem;
+
+    .title {
+      padding: 1rem 0;
+    }
+
+    .credit-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 1rem 0;
+      border-bottom: dashed 1px rgba(255, 255, 255, 0.4);
+
+      div {
+        text-align: right;
+
+        p+p {
+          padding-top: 1rem;
+        }
+      }
+    }
+  }
+
+  .summary {
+    background-image: linear-gradient(to right, #104bb6, #0c43bf);
+    height: 12rem;
+    padding: 1.5rem 2rem;
+
+    p {
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+
+      .value {
+        font-size: 1.5rem;
+      }
+
+      &.profit {
+        font-size: 1.2rem;
+
+        .value {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
 }
