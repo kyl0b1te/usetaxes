@@ -25,18 +25,22 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.creditsSubscription = this.store.select('credits').subscribe((state: fromApp.State) => {
       this.credits = {};
       this.total = state.total;
-      this.groupByQuarter(state.credits);
+      this.groupByDate(state.credits);
     });
   }
 
-  groupByQuarter(credits: CreditModel[]) {
+  private groupByDate(credits: CreditModel[]) {
+    const unsorted = {};
     for (const credit of credits) {
       const creditDate = this.getCreditDate(credit.date);
-      if (!this.credits[creditDate]) {
-        this.credits[creditDate] = [];
+      if (!unsorted[creditDate]) {
+        unsorted[creditDate] = [];
       }
-      this.credits[creditDate].push(credit);
+      unsorted[creditDate].push(credit);
     }
+    Object.keys(unsorted).sort().map((key: string) => {
+      this.credits[key] = unsorted[key];
+    });
   }
 
   private getCreditDate(date: Date): string {
