@@ -21,7 +21,7 @@ export class ConversionService {
     return [
       'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?',
       `valcode=${currency}&`,
-      `date=${date.toJSON().split('T')[0].replace(/-/g, '')}&`,
+      `date=${date.toLocaleDateString().replace(/-/g, '')}&`,
       'json'
     ].join('');
   }

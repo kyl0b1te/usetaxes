@@ -44,7 +44,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   private getCreditDate(date: Date): string {
-    return date.toJSON().split('T')[0].split('-').reverse().join('.');
+    return date.toLocaleDateString().split('-').reverse().join('.');
   }
 
   ngOnDestroy() {
