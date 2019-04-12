@@ -13,8 +13,10 @@
   <button class="credit-action edit" (click)="onEditCreditModeToggle()"></button>
 </div>
 <ng-template #editCreditForm>
-  <app-edit-credit
-    (onCancel)="onEditCreditModeToggle()"
-    (onSubmit)="onEditClicked($event)"
-    [credit]="credit"></app-edit-credit>
+  <div class="credit-edit">
+    <app-edit-credit
+      (onCancel)="onEditCreditModeToggle()"
+      (onSubmit)="onEditClicked($event)"
+      [credit]="credit"></app-edit-credit>
+  </div>
 </ng-template>
