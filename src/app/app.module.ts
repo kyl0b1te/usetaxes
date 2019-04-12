@@ -23,6 +23,7 @@ import { AmountPipe } from './shared/amount.pipe';
 import { appReducer } from './store/app.reducer';
 import { QuarterService } from './shared/quarter.service';
 import { ConversionService } from './credit-list/conversion.service';
+import { CurrencySelectorComponent } from './credit-list/edit-credit/currency-selector/currency-selector.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ConversionService } from './credit-list/conversion.service';
     CreditListFilterComponent,
     AmountPipe,
     EditCreditComponent,
+    CurrencySelectorComponent,
   ],
   imports: [
     BrowserModule,

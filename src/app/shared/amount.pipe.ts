@@ -11,6 +11,6 @@ export class AmountPipe extends CurrencyPipe implements PipeTransform {
     if (!value) {
       return '';
     }
-    return super.transform(value.amount, value.currency, 'symbol', '.2-2', 'uk');
+    return super.transform(value.amount, value.currency.symbol, 'symbol', '.2-2', 'uk');
   }
 }

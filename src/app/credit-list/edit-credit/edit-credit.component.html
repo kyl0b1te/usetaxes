@@ -4,26 +4,25 @@
       <input
         type="text"
         name="date"
+        placeholder="Дата"
         formControlName="date"
         ngx-mydatepicker
         [options]="dateOptions"
         #dp="ngx-mydatepicker"
         (click)="dp.toggleCalendar()">
     </div>
-    <div class="form-control">
+    <div class="form-control control-amount">
       <input
         type="text"
         name="amount"
+        placeholder="Сума"
         formControlName="amount">
-    </div>
-    <div class="form-control">
-      <select
-        name="currency"
-        formControlName="currency">
-        <option
-          *ngFor="let currency of getSupportedCurrencies()"
-          [value]="currency">{{ currency }}</option>
-      </select>
+      <div class="currency-selector-wrapper">
+        <app-currency-selector
+          [(selectedCurrency)]="selectedCurrency"
+          (onCurrencySelect)="selectedCurrency = $event"
+        ></app-currency-selector>
+      </div>
     </div>
   </div>
   <div class="credit-form-action">

@@ -1,0 +1,21 @@
+<div class="currency-selector">
+  <div class="presets-list">
+    <button
+      *ngFor="let currency of getPresetCurrencies()"
+      [ngClass]="{'active': currency.code === selectedCurrency}"
+      (click)="onSelect(currency.code)">
+      {{ currency.symbol }}
+    </button>
+    <button (click)="isInSelectionMode = !isInSelectionMode">...</button>
+  </div>
+  <div class="currency-list" *ngIf="isInSelectionMode">
+    <button
+      (click)="onSelect(currency.code)"
+      *ngFor="let currency of getCurrencies()">
+      <span
+        [ngClass]="{'active': currency.code === selectedCurrency, 'symbol': true}"
+      >{{ currency.symbol }}</span>
+      <span>{{ currency.name }}</span>
+    </button>
+  </div>
+</div>

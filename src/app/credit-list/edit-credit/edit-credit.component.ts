@@ -21,6 +21,7 @@ export class EditCreditComponent implements OnInit {
   creditForm: FormGroup;
 
   defaultCurrency = 'UAH';
+  selectedCurrency: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,22 +33,13 @@ export class EditCreditComponent implements OnInit {
   }
 
   initCreditForm() {
-    const amountValidator = Validators.pattern('^[1-9]{1}[0-9]*');
+    const amountValidator = Validators.pattern('^[1-9]{1}[0-9\.\,]*');
+    const { date, amount, currency } = this.getCreditData();
     this.creditForm = this.formBuilder.group({
-      date: [
-        this.credit ? { jsdate: this.credit.date } : null,
-        Validators.required
-      ],
-      amount: [
-        this.credit ? this.credit.national.amount : null,
-        [Validators.required, amountValidator]
-      ],
-      currency: [ this.defaultCurrency ]
+      date: [ date ? { jsdate: date } : null, Validators.required ],
+      amount: [ amount, [Validators.required, amountValidator] ]
     });
-  }
-
-  getSupportedCurrencies() {
-    return ['UAH', 'EUR', 'USD', 'CAD', 'CHF', 'PLN', 'CHF', 'GBP'];
+    this.selectedCurrency = currency;
   }
 
   getForeignAmount(amount: number, currency: string) {
@@ -62,22 +54,36 @@ export class EditCreditComponent implements OnInit {
   }
 
   onSubmitClicked() {
-    const { amount, currency, date } = this.creditForm.value;
-    const foreign = this.getForeignAmount(+amount, currency);
+    const { amount, date } = this.creditForm.value;
 
-    if (foreign) {
-      this.conService.getConversionRate(date.jsdate, currency).subscribe((rates) => {
-        const converted = Math.round(amount * rates[0].rate * 100) / 100;
-        console.log(converted);
-        this.onSubmit.emit(
-          new CreditModel(date.jsdate, converted, foreign)
-        );
-      });
-    } else {
-      this.onSubmit.emit(
-        new CreditModel(date.jsdate, +amount)
-      );
+    if (this.selectedCurrency === this.defaultCurrency) {
+      return this.addNewCredit(date.jsdate, amount);
     }
+
+    this.conService.getConversionRate(date.jsdate, this.selectedCurrency).subscribe((rates) => {
+      this.addNewCredit(
+        date.jsdate,
+        Math.round(amount * rates[0].rate * 100) / 100,
+        new AmountModel(+amount, this.selectedCurrency)
+      );
+    });
+  }
+
+  private addNewCredit(date: Date, national: number, foreign?: AmountModel) {
+    const credit = new CreditModel(date, +national, foreign);
+    this.onSubmit.emit(credit);
     this.creditForm.reset();
+  }
+
+  private getCreditData(): { date: Date, amount: number, currency: string } {
+    if (!this.credit) {
+      return { date: null, amount: null, currency: this.defaultCurrency };
+    }
+    const { date, national, foreign } = this.credit;
+    return {
+      date,
+      amount: foreign ? foreign.amount : national.amount,
+      currency: foreign ? foreign.currency.code : national.currency.code,
+    }
   }
 }
