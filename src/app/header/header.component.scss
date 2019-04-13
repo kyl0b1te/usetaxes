@@ -16,4 +16,13 @@ header {
       color: #0f49b1;
     }
   }
+  p {
+    a {
+      display: block;
+      width: 32px;
+      height: 32px;
+      background: url('/assets/github-logo.png') center no-repeat;
+      background-size: 32px;
+    }
+  }
 }

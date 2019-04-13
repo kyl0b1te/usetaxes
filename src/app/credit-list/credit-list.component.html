@@ -8,7 +8,10 @@
 		<div class="add-credit">
 			<button
 				*ngIf="!addCreditMode; else addCreditForm"
-				(click)="onAddCreditModeToggle()">+ <br />Додати надходження</button>
+				(click)="onAddCreditModeToggle()">
+					<span>+</span>
+					Додати надходження
+				</button>
 			<ng-template #addCreditForm>
 				<app-edit-credit
 					(onCancel)="onAddCreditModeToggle()"
