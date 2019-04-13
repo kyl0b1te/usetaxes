@@ -12,6 +12,7 @@ steps:
   - name: data
     path: /tmp/app-build
   commands:
+    - npm i -g @angular/cli
     - npm i --production
     - npm run build
     - cp -R build /tmp/app-build
