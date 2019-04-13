@@ -18,6 +18,12 @@
     &.control-date {
       position: relative;
 
+      input {
+        background: url('/assets/icons/calendar.svg') no-repeat;
+        background-size: 1.5rem;
+        background-position: right 0.5rem center;
+      }
+
       .ngxmp {
         position: absolute;
       }

@@ -29,5 +29,4 @@ export class CreditListComponent implements OnInit {
     this.store.dispatch(new AppActions.AddCredit(credit));
     this.addCreditMode = false;
   }
-
 }
