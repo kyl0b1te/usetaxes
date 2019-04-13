@@ -2,6 +2,7 @@
   <div class="presets-list">
     <button
       *ngFor="let currency of getPresetCurrencies()"
+      [title]="currency.name"
       [ngClass]="{'active': currency.code === selectedCurrency}"
       (click)="onSelect(currency.code)">
       {{ currency.symbol }}

@@ -25,7 +25,11 @@ export class CurrencySelectorComponent implements OnInit {
   }
 
   getPresetCurrencies() {
-    return this.currencies.slice(0, 3);
+    let preset = this.currencies.slice(0, 3);
+    if (!preset.find(currency => currency.code === this.selectedCurrency)) {
+      preset[2] = ConversionService.getCurrencyByCode(this.selectedCurrency);
+    }
+    return preset;
   }
 
   onSelect(currency: string) {

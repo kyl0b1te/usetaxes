@@ -15,7 +15,6 @@ import { CreditListComponent } from './credit-list/credit-list.component';
 import { HeaderComponent } from './header/header.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CreditListItemComponent } from './credit-list/credit-list-item/credit-list-item.component';
-import { CreditListFilterComponent } from './header/credit-list-filter/credit-list-filter.component';
 import { EditCreditComponent } from './credit-list/edit-credit/edit-credit.component';
 
 import { AmountPipe } from './shared/amount.pipe';
@@ -32,7 +31,6 @@ import { CurrencySelectorComponent } from './credit-list/edit-credit/currency-se
     HeaderComponent,
     CheckoutComponent,
     CreditListItemComponent,
-    CreditListFilterComponent,
     AmountPipe,
     EditCreditComponent,
     CurrencySelectorComponent,
