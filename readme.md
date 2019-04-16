@@ -1,29 +1,32 @@
 # Usetaxes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.3.
+Ukrainian self-employed tax calculator.
+Ukraine has 3 self-employment financial groups.
+Usetaxes provides calculation only for 3-rd group (the most popular in IT).
 
-## Development server
+Project has been built with privacy concepts in mind.
+All user data is private and usetaxes do not send income information anywhere.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- total income, tax and profit calculation
+- automatic currency conversion with NBU rate
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Deployment
 
-## Build
+Deployment can be made by using docker.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Execute this command for build a new docker image:
 
-## Running unit tests
+`docker build -t usetaxes .`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+And this one for run a container that will deploy project into the S3 bucket:
 
-## Running end-to-end tests
+`docker run --rm -it --env-file .env usetaxes`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Note, for deployment you have to create your personal `.env` file, you can use `.env.example` as a template.
 
-## Further help
+## Contributions
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
+All kind of contributions are welcome.
 
