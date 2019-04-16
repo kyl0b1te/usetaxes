@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { CreditModel } from '../shared/credit.model';
 import * as fromApp from '../store/app.reducer';
 import { AmountModel } from '../shared/amount.model';
+import { DateService } from '../shared/date.service';
 
 @Component({
   selector: 'app-checkout',
@@ -18,7 +19,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   total: { credit: AmountModel, tax: AmountModel, profit: AmountModel };
 
   constructor(
-    private store: Store<fromApp.AppState>
+    private store: Store<fromApp.AppState>,
+    private dateService: DateService
   ) { }
 
   ngOnInit() {
@@ -44,7 +46,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   private getCreditDate(date: Date): string {
-    return date.toLocaleDateString().split('-').reverse().join('.');
+    const { year, month, day } = this.dateService.getFormattedDate(date);
+    return `${day}.${month}.${year}`;
   }
 
   ngOnDestroy() {

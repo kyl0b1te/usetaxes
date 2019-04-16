@@ -23,6 +23,7 @@ import { appReducer } from './store/app.reducer';
 import { QuarterService } from './shared/quarter.service';
 import { ConversionService } from './credit-list/conversion.service';
 import { CurrencySelectorComponent } from './credit-list/edit-credit/currency-selector/currency-selector.component';
+import { DateService } from './shared/date.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CurrencySelectorComponent } from './credit-list/edit-credit/currency-se
   ],
   providers: [
     QuarterService,
-    ConversionService
+    ConversionService,
+    DateService
   ],
   bootstrap: [AppComponent]
 })

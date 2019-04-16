@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { CurrencyRateModel } from './currency-rate.model';
 import { Observable } from 'rxjs';
 import { CurrencyModel } from '../shared/currency.model';
+import { DateService } from '../shared/date.service';
 
 @Injectable()
 export class ConversionService {
@@ -18,7 +19,10 @@ export class ConversionService {
     new CurrencyModel('GBP', '£', 'Фунт стерлінгів'),
   ];
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private dateService: DateService
+  ) { }
 
   static getCurrencyByCode(code: string): CurrencyModel {
     return ConversionService.currencies.find((currency: CurrencyModel): boolean => currency.code === code);
@@ -44,8 +48,13 @@ export class ConversionService {
     return [
       'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?',
       `valcode=${currency}&`,
-      `date=${date.toLocaleDateString().replace(/-/g, '')}&`,
+      `date=${this.getRequestDate(date)}&`,
       'json'
     ].join('');
+  }
+
+  private getRequestDate(date: Date): string {
+    const { year, month, day } = this.dateService.getFormattedDate(date);
+    return `${year}${month}${day}`;
   }
 }

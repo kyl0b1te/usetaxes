@@ -16,13 +16,11 @@ export interface State {
 }
 
 export const initialState: State = {
-  credits: [
-    new CreditModel(new Date(), 100),
-  ],
+  credits: [ ],
   total: {
-    credit: new AmountModel(100, 'UAH'),
-    tax: new AmountModel(5, 'UAH'),
-    profit: new AmountModel(95, 'UAH'),
+    credit: new AmountModel(0, 'UAH'),
+    tax: new AmountModel(0, 'UAH'),
+    profit: new AmountModel(0, 'UAH'),
   }
 };
 
