@@ -9,14 +9,14 @@ RUN apk add --no-cache \
   less
 RUN npm i -g @angular/cli && pip install awscli
 
-WORKDIR /app
+WORKDIR /app/src
 
-COPY package.json .
-COPY package-lock.json .
-
-RUN npm i
 COPY . .
 
-ENTRYPOINT rm -rf /app/dist && \
+RUN npm i && \
+  rm -rf /app/src/dist && \
   npm run build --prod && \
-  aws s3 sync /app/dist/ s3://$AWS_S3_BUCKET
+  cp -R /app/src/dist /app && \
+  rm -rf /app/src
+
+ENTRYPOINT aws s3 sync /app/dist/ s3://$AWS_S3_BUCKET
