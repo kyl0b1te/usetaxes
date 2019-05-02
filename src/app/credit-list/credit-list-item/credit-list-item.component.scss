@@ -27,10 +27,14 @@
     }
 
     .national-value {
+      width: 100%;
       font-size: 1.75rem;
       font-weight: 400;
       color: #5e5e5e;
       line-height: 1.6;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .foreign-value {
