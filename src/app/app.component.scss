@@ -1,15 +1,31 @@
 .container {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 
-  main {
-    width: 60%;
-    padding-left: 2%;
-    height: 100vh;
-  }
+    main {
+        width: 65%;
+        height: 100vh;
+    }
 
-  aside {
-    width: 35%;
-    height: 100vh;
-  }
+    aside {
+        width: 35%;
+        height: 100vh;
+    }
+}
+
+@media screen and (max-width: 75rem) {
+    .container {
+        display: block;
+
+        main {
+            width: 90%;
+        }
+
+        aside {
+            position: fixed;
+            top: 0;
+            right: -80%;
+            width: 90%;
+        }
+    }
 }
